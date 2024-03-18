@@ -47,3 +47,15 @@ cc_library(
 		"//artisan/math:vec2",
 	]
 )
+
+cc_library(
+	name = "color-and-light-shader",
+	srcs = ["color-and-light-shader.cpp"],
+	hdrs = ["color-and-light-shader.h"],
+	visibility = ["//visibility:public"],
+	deps = [
+		":shader",
+		"//artisan/math:transform",
+		"//artisan/math:vec2",
+	]
+)

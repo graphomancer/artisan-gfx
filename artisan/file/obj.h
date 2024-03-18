@@ -48,6 +48,7 @@ class OBJParser {
 	std::vector<VT> parsed_vt;
 	std::vector<VN> parsed_vn;
 	std::vector<F> parsed_f;
+	double max_v_value;
 	void ParseLine(std::string line);
 	void ParseV(std::vector<std::string> line_components);
 	void ParseVT(std::vector<std::string> line_components);

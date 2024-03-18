@@ -8,7 +8,7 @@ namespace artisan_gfx {
 
 namespace obj_parser {
 
-OBJParser::OBJParser() {}
+OBJParser::OBJParser() : max_v_value(0) {}
 
 Triangle3 OBJParser::FaceToTriangle(F f) {
 	return Triangle3(
@@ -28,6 +28,8 @@ std::vector<Triangle3> OBJParser::GetTriangles() {
 
 Vertex3 OBJParser::FaceComponentToVertex(FComponent f_c) {
 	V v = parsed_v[f_c[0]];
+	v.xyz = v.xyz / max_v_value;
+
 	VT vt = parsed_vt[f_c[1]];
 	VN vn = parsed_vn[f_c[2]];
 	Vertex3 vrtx(v.xyz);
@@ -77,6 +79,11 @@ void OBJParser::ParseLine(std::string line) {
 void OBJParser::ParseV(std::vector<std::string> line_components) {
 	V v;
 	v.xyz = ParseVExpression(line_components);
+	for(int i = 0; i < 3; i ++) {
+		if(std::abs(v.xyz[i]) > max_v_value) {
+			max_v_value = std::abs(v.xyz[i]);
+		}
+	}
 	parsed_v.push_back(v);
 }
 

@@ -36,7 +36,7 @@ The flexibility of the `Vec` and `Mat` types allows them to be used to represent
 
 Common Vector and Matrix types are aliased, for example `Vec3` represents `Vec<double, 3>` and `Mat3` represents `Mat<double, 3, 3>`
 
-#### Triangles and Vertices
+##### Triangles and Vertices
 
 Artisan GFX represents triangles using the `Triangle<VertexSubtype>` type. Each `Triangle<VertexSubtype>` contains three `VertexSubtype` objects, each being a subtype of  `Vertex<Type, Dimension>`. The flexibility of the `Triangle` and `Vertex` types allows them to be used to represent triangles in diverse scenarios such as
 

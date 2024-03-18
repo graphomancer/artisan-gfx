@@ -16,6 +16,7 @@ cc_binary(
 		"//artisan/triangle/shader:simple-tga-shader",
 		"//artisan/triangle/shader:phong-shader",
 		"//artisan/triangle/shader:directional-light-shader",
+		"//artisan/triangle/shader:color-and-light-shader",
 		"//artisan/file:tga",
 	],
 	data = [

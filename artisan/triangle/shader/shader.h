@@ -11,6 +11,8 @@ Triangle3 Apply4DTransform(Mat4 &transform, Triangle3 &triangle);
 
 Mat<double, 2, 3> VertexUV(CTriangle& ct);
 
+Mat<double, 3, 3> VertexNormal(CTriangle& ct);
+
 class Shader {
 public:
 	virtual Triangle3 Vertex(Triangle3 &t) = 0;

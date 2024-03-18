@@ -14,6 +14,7 @@
 #include "artisan/triangle/shader/simple-tga-shader.h"
 #include "artisan/triangle/shader/phong-shader.h"
 #include "artisan/triangle/shader/directional-light-shader.h"
+#include "artisan/triangle/shader/color-and-light-shader.h"
 #include "artisan/file/tga.h"
 #include <vector>
 #include <utility>
@@ -51,18 +52,22 @@ int main() {
 	TGANormalmap normalmap_tga = TGANormalmap(tga_parser::ParseTGAFile("./artisan/assets/diablo3_pose_nm.tga").value());
 	TGASpecularmap specmap_tga = TGASpecularmap(tga_parser::ParseTGAFile("./artisan/assets/diablo3_pose_spec.tga").value());
 
+	vector<Triangle3> teapot = obj_parser::ParseOBJFile("./artisan/assets/teapot.obj").GetTriangles();
+
 	PhongShader ps(viewport, projection, camera, Vec3({1,1,1}), diffuse_tga,
 			normalmap_tga, specmap_tga);
 	SimpleTGAShader s(viewport * projection * camera, diffuse_tga);
 
 	DirectionalLightShader ds(viewport, projection, camera, Vec3({1,1,1}), diffuse_tga,
 			normalmap_tga);
+
+	ColorAndLightShader cs(viewport, projection, camera, Vec3({1,1,1}), Color({255, 255, 255}));
 	
 	PixelGridCanvas pgcanvas = PixelGridCanvas(width, height);
 
 
-	for(unsigned int i = 0; i < triangles.size(); i++) {
-		pgcanvas.ShadeTriangle(ds, triangles[i]);
+	for(unsigned int i = 0; i < teapot.size(); i++) {
+		pgcanvas.ShadeTriangle(cs, teapot[i]);
 	}
 
 	PPM output(pgcanvas.GetPixelGrid(), 255);

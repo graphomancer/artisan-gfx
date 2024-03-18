@@ -6,6 +6,7 @@ filegroup(
 		"diablo3_pose.tga",
 		"diablo3_pose_nm.tga",
 		"diablo3_pose_spec.tga",
+		"teapot.obj",
 		"head.obj",
 		"head.tga",
 		"head_nm.tga",
