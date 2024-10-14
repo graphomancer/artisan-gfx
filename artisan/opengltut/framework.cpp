@@ -163,47 +163,41 @@ void APIENTRY DebugFunc(GLenum source, GLenum type, GLuint id, GLenum severity, 
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-
 	int width = 500;
 	int height = 500;
-	unsigned int displayMode = GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH | GLUT_STENCIL;
-	displayMode = defaults(displayMode, width, height);
 
-	glutInitDisplayMode (displayMode);
-	glutInitContextVersion (3, 3);
-	glutInitContextProfile(GLUT_CORE_PROFILE);
-#ifdef DEBUG
-	glutInitContextFlags(GLUT_DEBUG);
-#endif
-	glutInitWindowSize (width, height); 
-	glutInitWindowPosition (300, 200);
-	int window = glutCreateWindow (argv[0]);
 
-	glload::LoadFunctions();
+	GLFWwindow* window;
 
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+	// glfwSetErrorCallback(error_callback); // TODO specify error_callback
 
-	if(!glload::IsVersionGEQ(3, 3))
-	{
-		printf("Your OpenGL version is %i, %i. You must have at least OpenGL 3.3 to run this tutorial.\n",
-			glload::GetMajorVersion(), glload::GetMinorVersion());
-		glutDestroyWindow(window);
-		return 0;
+	if (!glfwInit()) {
+		exit(EXIT_FAILURE);
 	}
 
-	if(glext_ARB_debug_output)
-	{
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
-		glDebugMessageCallbackARB(DebugFunc, (void*)15);
+	window = glfwCreateWindow(width, height, "Tutorial", NULL, NULL);
+
+	if (!window) {
+		glfwTerminate();
+		exit(EXIT_FAILURE);
 	}
 
-	init();
+	// glfwSetKeyCallback(window, key_callback); // TODO specify key_callback
+	
+	glfwMakeContextCurrent(window);
 
-	glutDisplayFunc(display); 
-	glutReshapeFunc(reshape);
-	glutKeyboardFunc(keyboard);
-	glutMainLoop();
+	gladLoadGL(glfwGetProcAddress);
+	glfwSwapInterval(1);
+
+	init(); //TODO, get frum tut
+
+	while (!glfwWindowShouldClose(window)) {
+			display(); //TODO, get from tut
+			glfwPollEvents();
+	}
+
+
+
 	return 0;
 }
 

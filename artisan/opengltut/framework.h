@@ -8,6 +8,14 @@
 
 namespace framework 
 {
+
+	class Tutorial {
+		virtual void init() = 0;
+		virtual void display() = 0;
+		virtual void reshape(int w, int h) = 0;
+		virtual void keyboard(unsigned char key, int x, int y) = 0;
+	}
+
 	float DegToRad(float fAngDeg);
 
 	GLuint CreateShader(GLenum eShaderType,
