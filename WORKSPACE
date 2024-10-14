@@ -26,5 +26,13 @@ http_archive(
     ],
 )
 
+http_archive(
+    name = "glfw",
+    build_file = "@//:BUILD.glfw",
+    sha256 = "fd21a5f65bcc0fc3c76e0f8865776e852de09ef6fbc3620e09ce96d2b2807e04",
+    strip_prefix = "glfw-3.3.7",
+    urls = ["https://github.com/glfw/glfw/archive/3.3.7.tar.gz"],
+)
+
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
